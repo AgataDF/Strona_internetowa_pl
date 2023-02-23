@@ -35,6 +35,12 @@ p{
     line-height: 2;
 }
 
+fieldset{
+    border: none;
+}
+
+
+
 .top_container {
     background-color: #FFFBE9;
     position: relative;
@@ -45,6 +51,7 @@ p{
 .middle_container{
     padding: 100px 0 100px 0;
 }
+
 
 .bottom_container{
     background-color: #CCD6A6;
@@ -117,4 +124,13 @@ p{
     color: #61764B;
     font-size: 0.75rem;
     margin: 0;
+}
+
+/* new article */
+
+.article{
+    margin: 100px;
+    text-align: center;
+    width: 50%;
+    padding: 0;
 }

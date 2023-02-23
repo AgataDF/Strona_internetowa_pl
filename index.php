@@ -1,18 +1,13 @@
 <?php 
 
-require 'includes/database.php';
+require 'includes/init.php';
 
-$sql = "SELECT *
-        FROM artykul
-        ORDER BY published_at;";
+$conn = require 'includes/db.php';
 
-$results = mysqli_query($conn, $sql);
+$paginator = new Paginator($_GET['page'] ?? 1, 4, Article::getTotal($conn, true));
 
-if($results===false){
-    echo mysqli_error($conn);
-} else {
-    $articles = mysqli_fetch_all ($results, MYSQLI_ASSOC);
-}
+$articles = Article::getPage($conn, $paginator->limit, $paginator->offset, true);
+
 ?>
 
 <!DOCTYPE html>
@@ -61,22 +56,38 @@ if($results===false){
 
     <div class="portfolio">
       <h2>Portfolio</h2>
-      <p> <a href="new_article.php">Dodaj artykuł </p>
+      
+      <?php require 'includes/navigation.php'; ?>
+
+      
       <?php if (empty($articles)): ?>
         <p>Nie znaleziono artykułów.</p>
             
       <?php else: ?>
-
         
         <?php foreach ($articles as $article): ?>
           
           <article class="skill-row">
-            <h3><a href="article.php?id=<?= $article['id']; ?>"><?= $article['title']; ?></a></h3>
+            <h3><a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a></h3>
+
+            <time datetime="<?= $article['published_at'] ?>"><?php
+                        $datetime = new DateTime($article['published_at']);
+                        echo $datetime->format("j.m.Y");
+                    ?></time>
+
+            <?php if ($article['category_names']) : ?>
+                <p>Kategoria:
+                    <?php foreach ($article['category_names'] as $name) : ?>
+                        <?= htmlspecialchars($name); ?>
+                    <?php endforeach; ?>
+                <p>
+            <?php endif; ?>
+
             <p><?= $article['content']; ?></p>
           </article>
           
         <?php endforeach; ?>
-        
+        <?php require 'includes/pagination.php'; ?>
 
       <?php endif; ?>
     </div>
@@ -86,10 +97,11 @@ if($results===false){
     <div class="contact-me">
       <h2>Kontakt</h2>
       <h3 class="contact-text-h3"> ⬇ Jeśli masz jakieś pytania ⬇ </h3>
-      <a class="btn" href="mailto:agata.dziuba.programista@gmail.com">Skontaktuj się</a>
+      <a class="btn" href="/contact.php">Skontaktuj się</a>
     </div>
   </main>
 
+  <?php require 'includes/jsscript.php'; ?>
 
 <footer class="bottom_container">
   <p class="copyright">© Agata Dziuba-Flizikowska</p>

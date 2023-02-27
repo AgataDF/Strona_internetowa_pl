@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php require '../includes/navigation.php'; ?>
 
     <main>
-            <div class="article">
+            <div class="skill-row" style="text-align: center;">
                 
                 <?php require 'includes/article-form.php'; ?>
                 

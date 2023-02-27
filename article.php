@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <main>
-            <div class="article">
+            <div class="skill-row" style="text-align: center;">
             <?php if ($article) : ?>
 
                     <article>

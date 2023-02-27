@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php require '../includes/navigation.php'; ?>
     <main>
 
-            <div class="article">
+            <div class="skill-row" style="text-align: center;">
                 
                 <form method="post">
                         <button> Usuń </button>

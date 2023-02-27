@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <h2>Dodaj nowy artykuł</h2>    
 <?php require '../includes/navigation.php'; ?>
-    <main class="article">
+    <main class="skill-row" style="text-align: center;">
             
                 
          <?php require 'includes/article-form.php'; ?>

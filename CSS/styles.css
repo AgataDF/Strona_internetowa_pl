@@ -129,8 +129,6 @@ fieldset{
 /* new article */
 
 .article{
-    margin: 100px;
     text-align: center;
     width: 50%;
-    padding: 0;
 }
